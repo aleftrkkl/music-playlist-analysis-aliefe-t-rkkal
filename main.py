@@ -30,8 +30,8 @@ def print_playlist(songs):
         print("------------------")
         sira = sira + 1
 
-# BONUS: En uzun sarkiyi bulan method
-def get_longest_song(songs):
+# En uzun sarkiyi bulan method
+def get_longest_song(songs):   
     en_uzun = songs[0]
     for sarki in songs:
         if sarki["sure"] > en_uzun["sure"]:
