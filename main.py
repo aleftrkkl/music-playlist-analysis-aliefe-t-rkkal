@@ -30,7 +30,7 @@ def print_playlist(songs):
         print("------------------")
         sira = sira + 1
 
-# En uzun sarkiyi bulan method
+# BONUS: En uzun sarkiyi bulan method
 def get_longest_song(songs):
     en_uzun = songs[0]
     for sarki in songs:
@@ -48,10 +48,16 @@ def filter_by_artist(songs, sanatci_adi):
 
 # Dinlenmeye gore siralayan method
 def sort_by_plays(songs):
-    sirali = sorted(songs, key=lambda x: x["dinlenme"], reverse=True)
+    sirali = list(songs)
+    for i in range(len(sirali)):
+        for j in range(len(sirali) - 1):
+            if sirali[j]["dinlenme"] < sirali[j + 1]["dinlenme"]:
+                gecici = sirali[j]
+                sirali[j] = sirali[j + 1]
+                sirali[j + 1] = gecici
     return sirali
 
-# Ana method
+# Ana method 
 def main():
     # Sarki listesi (liste icinde sozluk)
     sarkilar = [
@@ -77,17 +83,17 @@ def main():
     en_populer = get_most_played_song(sarkilar)
     print("En Cok Dinlenen: " + en_populer["ad"] + " - " + en_populer["sanatci"])
 
-    # BONUS: En uzun sarki
+    # En uzun sarki
     en_uzun = get_longest_song(sarkilar)
     print("En Uzun Sarki: " + en_uzun["ad"] + " (" + str(en_uzun["sure"]) + " saniye)")
 
-    # BONUS: Sanatciya gore filtreleme
+    # Sanatciya gore filtreleme
     print("\nEd Sheeran Sarkilari:")
     filtreli = filter_by_artist(sarkilar, "Ed Sheeran")
     for sarki in filtreli:
         print("  - " + sarki["ad"])
 
-    # BONUS: Dinlenmeye gore siralama
+    # Dinlenmeye gore siralama
     print("\nDinlenmeye Gore Siralama:")
     sirali = sort_by_plays(sarkilar)
     for sarki in sirali:
